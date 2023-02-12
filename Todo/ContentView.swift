@@ -35,18 +35,64 @@ struct ContentView: View {
     
     @State private var title: String = ""
     @State private var selectedPriority: Priority = .medium
+    @Environment(\.managedObjectContext) private var viewContext
+    @FetchRequest(entity: Task.entity(), sortDescriptors: [NSSortDescriptor(key: "dateC", ascending: false)]) private var allTask: FetchedResults<Task>
+    
+    // funcion para guardar tarea
+    
+    private func saveTask(){
+        
+        do{
+            let task = Task(context: viewContext)
+            task.title = title
+            task.priority = selectedPriority.rawValue
+            task.dateC = Date()
+            try viewContext.save()
+        }catch{
+            print(error.localizedDescription)
+        }
+        
+    }
+    
     var body: some View {
         // Vista de navegacion
         NavigationView{
             // vertical stack
             VStack{
                 TextField("Introduce un titulo", text:$title )
-                    // .textFieldStyle(.roundedBorder)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
                 Picker("Priority", selection:$selectedPriority){
                     ForEach(Priority.allCases){
                         priority in Text(priority.title).tag(priority)
                     }
+                }.pickerStyle(SegmentedPickerStyle())
+                
+                Button("save")
+                {
+                 saveTask()
                 }
+                .padding(10)
+                .frame(maxWidth: .infinity)
+                .background(Color.blue)
+                .foregroundColor(.white)
+                .clipShape(RoundedRectangle(cornerRadius: 10.0, style: .continuous))
+                
+                List{
+                    
+                    ForEach(allTask){ task in
+                        HStack{
+                            Circle()
+                            Text(task.title ?? "")
+                            
+                        }
+                                                
+                    }
+                    
+                }
+                
+                
+                
+                Spacer()
             }
             // titulo de la vista
             .padding()
@@ -57,6 +103,8 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        let persistentContainer = CoreData.shared.persistentContainer
+        ContentView().environment(\.managedObjectContext,
+                                  persistentContainer.viewContext)
     }
 }
