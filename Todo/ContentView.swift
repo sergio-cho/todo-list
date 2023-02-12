@@ -53,6 +53,45 @@ struct ContentView: View {
         }
         
     }
+    // color segun la prioriudad
+    private func styleForPriority(value: String) -> Color{
+        let priority = Priority(rawValue: value)
+        switch priority {
+        case .low:
+            return Color.green
+        case .medium:
+            return Color.orange
+        case .high:
+            return Color.red
+        default:
+            return Color.black
+        }
+    }
+    
+    // actualizar la tarea favorita
+    private func updateTask(task:Task){
+        task.isFavorite = !task.isFavorite
+        do{
+            try viewContext.save()
+        }catch{
+            print(error.localizedDescription)
+        }
+    }
+    
+    //eliminar tareas
+    private func deleteTask(at offset: IndexSet){
+        offset.forEach{index in
+            let task = allTask[index]
+            viewContext.delete(task)
+            
+            do{
+                try viewContext.save()
+            }catch {
+                print(error.localizedDescription)
+            }
+        }
+        
+    }
     
     var body: some View {
         // Vista de navegacion
@@ -82,15 +121,20 @@ struct ContentView: View {
                     ForEach(allTask){ task in
                         HStack{
                             Circle()
+                                .fill(styleForPriority(value: task.priority!))
+                                .frame(width:15 , height: 15)
+                            Spacer().frame(width:20 )
                             Text(task.title ?? "")
+                            Spacer()
                             
+                            Image(systemName: task.isFavorite ? "heart.fill" : "heart")
+                                .foregroundColor(.red)
+                                .onTapGesture {
+                                    updateTask(task: task)
+                                }
                         }
-                                                
-                    }
-                    
+                    }.onDelete(perform: deleteTask(at:))
                 }
-                
-                
                 
                 Spacer()
             }
