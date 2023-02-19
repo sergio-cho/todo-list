@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		49160CBE29A2B7A7007ED5B2 /* MyColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49160CBD29A2B7A7007ED5B2 /* MyColors.swift */; };
 		4979DC9229982992009CB987 /* TodoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4979DC9129982992009CB987 /* TodoApp.swift */; };
 		4979DC9429982992009CB987 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4979DC9329982992009CB987 /* ContentView.swift */; };
 		4979DC9629982999009CB987 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4979DC9529982999009CB987 /* Assets.xcassets */; };
 		4979DC9929982999009CB987 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4979DC9829982999009CB987 /* Preview Assets.xcassets */; };
 		4979DCD02998335A009CB987 /* SimpleTodo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4979DCCE2998335A009CB987 /* SimpleTodo.xcdatamodeld */; };
 		4979DCD6299835E1009CB987 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4979DCD5299835E1009CB987 /* CoreData.swift */; };
-		49B2B749299D57C3001E0592 /* Story.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49B2B748299D57C2001E0592 /* Story.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +34,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		49160CBD29A2B7A7007ED5B2 /* MyColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyColors.swift; sourceTree = "<group>"; };
 		4979DC9129982992009CB987 /* TodoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoApp.swift; sourceTree = "<group>"; };
 		4979DC9329982992009CB987 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4979DC9529982999009CB987 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -45,7 +46,6 @@
 		4979DCCA299832E1009CB987 /* TodoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TodoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4979DCCF2998335A009CB987 /* SimpleTodo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SimpleTodo.xcdatamodel; sourceTree = "<group>"; };
 		4979DCD5299835E1009CB987 /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
-		49B2B748299D57C2001E0592 /* Story.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Story.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,7 +87,6 @@
 		4979DC9029982992009CB987 /* Todo */ = {
 			isa = PBXGroup;
 			children = (
-				49B2B748299D57C2001E0592 /* Story.storyboard */,
 				4979DCD42998354C009CB987 /* Managers */,
 				4979DC9129982992009CB987 /* TodoApp.swift */,
 				4979DC9329982992009CB987 /* ContentView.swift */,
@@ -95,6 +94,7 @@
 				4979DC9A29982999009CB987 /* Info.plist */,
 				4979DC9729982999009CB987 /* Preview Content */,
 				4979DCCE2998335A009CB987 /* SimpleTodo.xcdatamodeld */,
+				49160CBD29A2B7A7007ED5B2 /* MyColors.swift */,
 			);
 			path = Todo;
 			sourceTree = "<group>";
@@ -226,7 +226,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49B2B749299D57C3001E0592 /* Story.storyboard in Resources */,
 				4979DC9929982999009CB987 /* Preview Assets.xcassets in Resources */,
 				4979DC9629982999009CB987 /* Assets.xcassets in Resources */,
 			);
@@ -253,6 +252,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49160CBE29A2B7A7007ED5B2 /* MyColors.swift in Sources */,
 				4979DCD6299835E1009CB987 /* CoreData.swift in Sources */,
 				4979DC9429982992009CB987 /* ContentView.swift in Sources */,
 				4979DC9229982992009CB987 /* TodoApp.swift in Sources */,

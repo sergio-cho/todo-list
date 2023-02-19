@@ -115,6 +115,8 @@ struct ContentView: View {
             VStack{
                 TextField("Introduce un titulo", text:$title )
                     .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .border(Color.MyCyan)
+                    .padding(10)
                 Picker("Priority", selection:$selectedPriority){
                     ForEach(Priority.allCases){
                         priority in Text(priority.title).tag(priority)
@@ -122,9 +124,8 @@ struct ContentView: View {
                             
                     }
                     
-                }.colorMultiply(Color.blue)
+                }.colorMultiply(Color.BlueSegment)
             .pickerStyle(SegmentedPickerStyle())
-                
                 
                 
                 List{
@@ -135,16 +136,16 @@ struct ContentView: View {
                             Circle()
                                 .fill(styleForPriority(value: task.priority!))
                                 .frame(width:15 , height: 15)
+                                
                             
                             Spacer().frame(width:20 )
                             
                             Text(task.title ?? "")
                             
                             Spacer()
-                        
-                            
+                                                
                             Image(systemName: task.isFavorite ? "circle.fill" : "circle")
-                                .foregroundColor(.red)
+                                .foregroundColor(Color.MyBlue)
                                 .onTapGesture {
                                     updateTask(task: task)
                         }
