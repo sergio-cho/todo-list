@@ -68,6 +68,21 @@ struct ContentView: View {
         }
     }
     
+    // colores
+    func color(value: String) -> Color {
+        let selected = Priority(rawValue: value)
+        switch selected {
+        case .low:
+            return Color.green
+        case .medium:
+            return Color.orange
+        case .high:
+            return Color.red
+        default:
+            return Color.black
+        }
+    }
+    
     // actualizar la tarea favorita
     private func updateTask(task:Task){
         task.isFavorite = !task.isFavorite
@@ -94,7 +109,7 @@ struct ContentView: View {
     }
     
     var body: some View {
-        // Vista de navegacion
+                // Vista de navegacion
         NavigationView{
             // vertical stack
             VStack{
@@ -103,9 +118,42 @@ struct ContentView: View {
                 Picker("Priority", selection:$selectedPriority){
                     ForEach(Priority.allCases){
                         priority in Text(priority.title).tag(priority)
+                            
+                            
                     }
-                }.pickerStyle(SegmentedPickerStyle())
+                    
+                }.colorMultiply(Color.blue)
+            .pickerStyle(SegmentedPickerStyle())
                 
+                
+                
+                List{
+                    
+                    ForEach(allTask){ task in
+                        HStack{
+                            
+                            Circle()
+                                .fill(styleForPriority(value: task.priority!))
+                                .frame(width:15 , height: 15)
+                            
+                            Spacer().frame(width:20 )
+                            
+                            Text(task.title ?? "")
+                            
+                            Spacer()
+                        
+                            
+                            Image(systemName: task.isFavorite ? "circle.fill" : "circle")
+                                .foregroundColor(.red)
+                                .onTapGesture {
+                                    updateTask(task: task)
+                        }
+                    }
+                    }.onDelete(perform: deleteTask(at:))
+                }
+                
+                
+                Spacer()
                 Button("save")
                 {
                  saveTask()
@@ -115,28 +163,6 @@ struct ContentView: View {
                 .background(Color.blue)
                 .foregroundColor(.white)
                 .clipShape(RoundedRectangle(cornerRadius: 10.0, style: .continuous))
-                
-                List{
-                    
-                    ForEach(allTask){ task in
-                        HStack{
-                            Circle()
-                                .fill(styleForPriority(value: task.priority!))
-                                .frame(width:15 , height: 15)
-                            Spacer().frame(width:20 )
-                            Text(task.title ?? "")
-                            Spacer()
-                            
-                            Image(systemName: task.isFavorite ? "heart.fill" : "heart")
-                                .foregroundColor(.red)
-                                .onTapGesture {
-                                    updateTask(task: task)
-                                }
-                        }
-                    }.onDelete(perform: deleteTask(at:))
-                }
-                
-                Spacer()
             }
             // titulo de la vista
             .padding()
