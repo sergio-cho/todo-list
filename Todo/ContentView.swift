@@ -108,15 +108,38 @@ struct ContentView: View {
         
     }
     
+    // esquema
+    @State private var scheme: ColorScheme = .light
+    @State private var isShowingNewAccountView = false
+    
+    func toggleScheme() {
+        if scheme == .light {
+            scheme = .dark
+        } else {
+            scheme = .light
+        }
+    }
+    
     var body: some View {
                 // Vista de navegacion
         NavigationView{
             // vertical stack
             VStack{
-                TextField("Introduce un titulo", text:$title )
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .border(Color.MyCyan)
-                    .padding(10)
+                HStack{
+                    TextField("Introduce un titulo", text:$title )
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .border(Color.MyCyan)
+                        .padding(10)
+                    
+                    // boton del esquema
+                    Button(action: {
+                        self.toggleScheme()
+                    }) {
+                        Image(systemName: "heart.fill")
+                    }
+                    .padding()
+                    
+                }
                 Picker("Priority", selection:$selectedPriority){
                     ForEach(Priority.allCases){
                         priority in Text(priority.title).tag(priority)
@@ -168,7 +191,7 @@ struct ContentView: View {
             // titulo de la vista
             .padding()
             .navigationTitle("Todas las tareas")
-        }
+        }.preferredColorScheme(scheme)
     }
 }
 
