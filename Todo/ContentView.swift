@@ -113,11 +113,7 @@ struct ContentView: View {
     @State private var isShowingNewAccountView = false
     
     func toggleScheme() {
-        if scheme == .light {
-            scheme = .dark
-        } else {
-            scheme = .light
-        }
+        scheme = scheme == .light ? .dark : .light
     }
     
     var body: some View {
@@ -135,7 +131,7 @@ struct ContentView: View {
                     Button(action: {
                         self.toggleScheme()
                     }) {
-                        Image(systemName: "heart.fill")
+                        Image(systemName:scheme == .light ? "sun.min.fill" : "moon.fill")
                     }
                     .padding()
                     
