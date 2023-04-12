@@ -53,10 +53,6 @@ struct ContentView: View {
         }
         
     }
-    
-    //clear text field
-    
-    
     // color segun la prioriudad
     private func styleForPriority(value: String) -> Color{
         let priority = Priority(rawValue: value)
@@ -64,7 +60,7 @@ struct ContentView: View {
         case .low:
             return Color.green
         case .medium:
-            return Color.yellow
+            return Color.orange
         case .high:
             return Color.red
         default:
@@ -116,33 +112,31 @@ struct ContentView: View {
     @State private var scheme: ColorScheme = .light
     @State private var isShowingNewAccountView = false
     
-    
     func toggleScheme() {
         scheme = scheme == .light ? .dark : .light
+       
     }
     
-    
     var body: some View {
-        
                 // Vista de navegacion
         NavigationView{
+            
             // vertical stack
             VStack{
                 HStack{
-                    TextField("Introduce un titulo", text:$title)
+                    TextField("Introduce un titulo", text:$title )
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .border(Color.MyCyan)
                         .padding(10)
+                        
                     
                     // boton del esquema
                     Button(action: {
                         self.toggleScheme()
                     }) {
-                        Image(systemName:scheme == .light ? "sun.min.fill" : "moon.fill")
-                            .foregroundColor(scheme == .light ? Color.black : Color.yellow)
+                        Image(systemName: scheme == .light ? "heart.fill" : "moon.fill")
+                            .foregroundColor(Color.purple)
                     }
-                    .padding()
-                    
                 }
                 Picker("Priority", selection:$selectedPriority){
                     ForEach(Priority.allCases){
@@ -151,7 +145,7 @@ struct ContentView: View {
                             
                     }
                     
-                }.colorMultiply(scheme == .light ? Color.MyBlue : Color.MyCyan)
+                }.colorMultiply(Color.BlueSegment)
             .pickerStyle(SegmentedPickerStyle())
                 
                 
@@ -177,7 +171,7 @@ struct ContentView: View {
                                     updateTask(task: task)
                         }
                     }
-                    }.onDelete(perform: deleteTask(at:))
+                    }.onDelete(perform: deleteTask(at:))            
                 }
                 
                 
@@ -185,7 +179,6 @@ struct ContentView: View {
                 Button("save")
                 {
                  saveTask()
-                    self.title = ""
                 }
                 .padding(10)
                 .frame(maxWidth: .infinity)
@@ -195,7 +188,8 @@ struct ContentView: View {
             }
             // titulo de la vista
             .padding()
-            .navigationTitle(" ☑️ Todas las tareas")
+            .navigationTitle("Todas las tareas")
+            
         }.preferredColorScheme(scheme)
     }
 }
