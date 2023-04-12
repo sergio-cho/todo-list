@@ -53,6 +53,10 @@ struct ContentView: View {
         }
         
     }
+    
+    //clear text field
+    
+    
     // color segun la prioriudad
     private func styleForPriority(value: String) -> Color{
         let priority = Priority(rawValue: value)
@@ -60,7 +64,7 @@ struct ContentView: View {
         case .low:
             return Color.green
         case .medium:
-            return Color.orange
+            return Color.yellow
         case .high:
             return Color.red
         default:
@@ -112,17 +116,20 @@ struct ContentView: View {
     @State private var scheme: ColorScheme = .light
     @State private var isShowingNewAccountView = false
     
+    
     func toggleScheme() {
         scheme = scheme == .light ? .dark : .light
     }
     
+    
     var body: some View {
+        
                 // Vista de navegacion
         NavigationView{
             // vertical stack
             VStack{
                 HStack{
-                    TextField("Introduce un titulo", text:$title )
+                    TextField("Introduce un titulo", text:$title)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .border(Color.MyCyan)
                         .padding(10)
@@ -132,6 +139,7 @@ struct ContentView: View {
                         self.toggleScheme()
                     }) {
                         Image(systemName:scheme == .light ? "sun.min.fill" : "moon.fill")
+                            .foregroundColor(scheme == .light ? Color.black : Color.yellow)
                     }
                     .padding()
                     
@@ -143,7 +151,7 @@ struct ContentView: View {
                             
                     }
                     
-                }.colorMultiply(Color.BlueSegment)
+                }.colorMultiply(scheme == .light ? Color.MyBlue : Color.MyCyan)
             .pickerStyle(SegmentedPickerStyle())
                 
                 
@@ -177,6 +185,7 @@ struct ContentView: View {
                 Button("save")
                 {
                  saveTask()
+                    self.title = ""
                 }
                 .padding(10)
                 .frame(maxWidth: .infinity)
@@ -186,7 +195,7 @@ struct ContentView: View {
             }
             // titulo de la vista
             .padding()
-            .navigationTitle("Todas las tareas")
+            .navigationTitle(" ☑️ Todas las tareas")
         }.preferredColorScheme(scheme)
     }
 }
