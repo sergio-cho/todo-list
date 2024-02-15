@@ -123,16 +123,20 @@ struct ContentView: View {
     
     
     var body: some View {
-        
                 // Vista de navegacion
+       
         NavigationView{
+                                              
+                
             // vertical stack
             VStack{
                 HStack{
                     TextField("Introduce un titulo", text:$title)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .border(Color.MyCyan)
+                        .border(scheme == .light ? Color.black : Color.MyCyan , width:2.0)
+                        
                         .padding(10)
+                        
                     
                     // boton del esquema
                     Button(action: {
@@ -151,7 +155,7 @@ struct ContentView: View {
                             
                     }
                     
-                }.colorMultiply(scheme == .light ? Color.MyBlue : Color.MyCyan)
+                }.colorMultiply(scheme == .light ? Color.MyCyan: Color.MyCyan)
             .pickerStyle(SegmentedPickerStyle())
                 
                 
@@ -172,7 +176,7 @@ struct ContentView: View {
                             Spacer()
                                                 
                             Image(systemName: task.isFavorite ? "circle.fill" : "circle")
-                                .foregroundColor(Color.MyBlue)
+                                .foregroundColor(scheme == .light ? Color.black : Color.white)
                                 .onTapGesture {
                                     updateTask(task: task)
                         }
@@ -188,14 +192,16 @@ struct ContentView: View {
                     self.title = ""
                 }
                 .padding(10)
-                .frame(maxWidth: .infinity)
-                .background(Color.blue)
+                .frame(width:200)
+                .background(Color.MyBlue)
                 .foregroundColor(.white)
                 .clipShape(RoundedRectangle(cornerRadius: 10.0, style: .continuous))
+                
+                
             }
             // titulo de la vista
             .padding()
-            .navigationTitle(" ☑️ Todas las tareas")
+            
         }.preferredColorScheme(scheme)
     }
 }
